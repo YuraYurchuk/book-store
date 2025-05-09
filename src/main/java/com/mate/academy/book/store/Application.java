@@ -26,6 +26,7 @@ public class Application {
                 Book hyperion = new Book();
                 hyperion.setTitle("Hyperion");
                 hyperion.setAuthor("Den Simons");
+                hyperion.setIsbn("978-966-10-4643-5");
                 hyperion.setPrice(BigDecimal.valueOf(500));
 
                 bookService.save(hyperion);

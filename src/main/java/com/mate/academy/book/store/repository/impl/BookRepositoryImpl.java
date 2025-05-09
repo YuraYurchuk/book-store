@@ -1,19 +1,20 @@
 package com.mate.academy.book.store.repository.impl;
 
+import com.mate.academy.book.store.exception.DataProcessingException;
 import com.mate.academy.book.store.model.Book;
 import com.mate.academy.book.store.repository.BookRepository;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@RequiredArgsConstructor
 public class BookRepositoryImpl implements BookRepository {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Override
     public Book save(Book book) {
@@ -25,11 +26,11 @@ public class BookRepositoryImpl implements BookRepository {
             session.save(book);
             transaction.commit();
             return book;
-        } catch (Exception e) {
+        } catch (DataProcessingException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can't add book to DB " + book);
+            throw new DataProcessingException("Can't add book to DB " + book, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,8 +42,8 @@ public class BookRepositoryImpl implements BookRepository {
     public List<Book> findAll() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("From Book", Book.class).list();
-        } catch (Exception e) {
-            throw new RuntimeException("Can't get all books from DB");
+        } catch (DataProcessingException e) {
+            throw new DataProcessingException("Can't get all books from DB", e);
         }
     }
 }
