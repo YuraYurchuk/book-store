@@ -1,6 +1,6 @@
-package com.mate.academy.book.store.repository;
+package com.book.store.repository;
 
-import com.mate.academy.book.store.model.Book;
+import com.book.store.model.Book;
 import java.util.List;
 
 public interface BookRepository {

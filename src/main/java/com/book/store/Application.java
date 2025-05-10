@@ -1,7 +1,7 @@
-package com.mate.academy.book.store;
+package com.book.store;
 
-import com.mate.academy.book.store.model.Book;
-import com.mate.academy.book.store.service.BookService;
+import com.book.store.model.Book;
+import com.book.store.service.BookService;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

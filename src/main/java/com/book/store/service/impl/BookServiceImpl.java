@@ -1,8 +1,8 @@
-package com.mate.academy.book.store.service.impl;
+package com.book.store.service.impl;
 
-import com.mate.academy.book.store.model.Book;
-import com.mate.academy.book.store.repository.BookRepository;
-import com.mate.academy.book.store.service.BookService;
+import com.book.store.model.Book;
+import com.book.store.repository.BookRepository;
+import com.book.store.service.BookService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
