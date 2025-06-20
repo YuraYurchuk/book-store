@@ -5,7 +5,6 @@ import com.book.store.dto.CreateBookRequestDto;
 import com.book.store.service.BookService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,11 +32,6 @@ public class BookController {
     @GetMapping("/{id}")
     public BookDto getById(@PathVariable Long id) {
         return bookService.findById(id);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
-        bookService.deleteBuId(id);
     }
 
 }
