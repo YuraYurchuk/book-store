@@ -13,7 +13,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
 @Entity
-@Table(name = "books")
+@Table(name = "book")
 @Setter
 @Getter
 @SQLDelete(sql = "UPDATE books SET is_deleted = true WHERE id = ?")
