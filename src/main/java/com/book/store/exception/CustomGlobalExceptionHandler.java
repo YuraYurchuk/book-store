@@ -12,11 +12,15 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+    private static final String TIME_STAMP = "timeStamp";
+    private static final String ERRORS = "errors";
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex,
@@ -25,13 +29,17 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             WebRequest request
     ) {
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timeStamp", LocalDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST);
+        body.put(TIME_STAMP, LocalDateTime.now());
         List<String> errors = ex.getBindingResult().getAllErrors().stream()
                 .map(this::getErrorMassage)
                 .toList();
-        body.put("errors", errors);
-        return new ResponseEntity<>(body, headers, status);
+        body.put(ERRORS, errors);
+        return new ResponseEntity<>(body, headers, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handlerEntityNotFoundException(EntityNotFoundException ex) {
+        return new ResponseEntity<>("Entity not found exception occurred", HttpStatus.NOT_FOUND);
     }
 
     private String getErrorMassage(ObjectError e) {

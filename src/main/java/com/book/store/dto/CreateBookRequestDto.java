@@ -11,7 +11,7 @@ import lombok.Data;
 public class CreateBookRequestDto {
     @NotBlank(message = "Title is required")
     private String title;
-    @NotBlank(message = "author is required")
+    @NotBlank(message = "Author is required")
     private String author;
     @NotBlank(message = "ISBN is required")
     @Pattern(regexp = "\\d{13}", message = "ISBN mast be 13 digits")
