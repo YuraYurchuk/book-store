@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,7 +34,7 @@ public class BookController {
             summary = "Save new Book",
             description = "Creates and saves a new book in the database"
     )
-
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public BookDto save(@RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.save(requestDto);
@@ -44,7 +45,7 @@ public class BookController {
             description = "Returns a paginated list of all books with optional sorting"
     )
     @GetMapping
-    public List<BookDto> findAll(Pageable pageable) {
+    public Page<BookDto> findAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
