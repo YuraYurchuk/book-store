@@ -14,11 +14,15 @@ import java.lang.annotation.Target;
 @Documented
 public @interface FieldMatch {
     String message() default "Field do not match";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 
-    String first();
-    String second();
+    String field();
+
+    String fieldMatch();
+
     @Target({ElementType.TYPE})
     @Retention(RetentionPolicy.RUNTIME)
     @interface List {
