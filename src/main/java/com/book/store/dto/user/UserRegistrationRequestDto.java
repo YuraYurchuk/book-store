@@ -7,7 +7,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 @Data
-@FieldMatch(first = "password", second = "repeatPassword")
+@FieldMatch(field = "password", fieldMatch = "repeatPassword")
 public class UserRegistrationRequestDto {
     @NotBlank(message = "email is required")
     @Email
