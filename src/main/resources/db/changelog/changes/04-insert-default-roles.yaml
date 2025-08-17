@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-default-role-user
+      author: yura
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: role
+                  value: USER
+
+  - changeSet:
+      id: insert-default-role-admin
+      author: yura
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: role
+                  value: ADMIN
