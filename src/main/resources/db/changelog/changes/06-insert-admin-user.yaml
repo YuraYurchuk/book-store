@@ -26,11 +26,11 @@ databaseChangeLog:
       author: mateacademy
       changes:
         - insert:
-            tableName: user_roles
+            tableName: users_roles
             columns:
               - column:
                   name: user_id
                   valueComputed: "(SELECT id FROM users WHERE email = 'admin@example.com')"
               - column:
                   name: role_id
-                  valueComputed: "(SELECT id FROM roles WHERE role = 'ADMIN')"
+                  valueComputed: "(SELECT id FROM roles WHERE role = 'ROLE_ADMIN')"
