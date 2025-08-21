@@ -59,6 +59,11 @@ public class User implements UserDetails {
     }
 
     @Override
+    public boolean isEnabled() {
+        return !isDeleted;
+    }
+
+    @Override
     public String getPassword() {
         return password;
     }
