@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +37,7 @@ public class BookController {
     )
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public BookDto save(@RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.save(requestDto);
     }
@@ -45,6 +47,7 @@ public class BookController {
             description = "Returns a paginated list of all books with optional sorting"
     )
     @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public Page<BookDto> findAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
@@ -54,6 +57,7 @@ public class BookController {
             description = "Returns a single book by its ID"
     )
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     public BookDto getById(@PathVariable Long id) {
         return bookService.findById(id);
     }
@@ -64,6 +68,7 @@ public class BookController {
     )
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteById(@PathVariable Long id) {
         bookService.deleteById(id);
     }
@@ -73,6 +78,7 @@ public class BookController {
             description = "Updates an existing book with new data"
     )
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public BookDto updateById(@PathVariable Long id,
                               @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.updateById(id, requestDto);
@@ -83,6 +89,7 @@ public class BookController {
             description = "Searches for books by title, author, or ISBN"
     )
     @GetMapping("/search")
+    @PreAuthorize("hasRole('USER')")
     public List<BookDto> search(BookSearchParametersDto bookSearchParametersDto) {
         return bookService.search(bookSearchParametersDto);
     }

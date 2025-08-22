@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-admin-user
+      author: mateacademy
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: admin@example.com
+              - column:
+                  name: password
+                  value: $2a$10$J2F/IaARJRSwYC4MWj6p0OId1q7W1pVDLbHIx.51rRhGcBjQC1igS
+              - column:
+                  name: first_name
+                  value: Admin
+              - column:
+                  name: last_name
+                  value: User
+              - column:
+                  name: shipping_address
+                  value: Lviv, Ukraine
+  - changeSet:
+      id: link-admin-role
+      author: mateacademy
+      changes:
+        - insert:
+            tableName: users_roles
+            columns:
+              - column:
+                  name: user_id
+                  valueComputed: "(SELECT id FROM users WHERE email = 'admin@example.com')"
+              - column:
+                  name: role_id
+                  valueComputed: "(SELECT id FROM roles WHERE role = 'ROLE_ADMIN')"
