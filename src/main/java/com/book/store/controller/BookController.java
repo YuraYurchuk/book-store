@@ -1,6 +1,7 @@
 package com.book.store.controller;
 
 import com.book.store.dto.book.BookDto;
+import com.book.store.dto.book.BookDtoWithoutCategoryIds;
 import com.book.store.dto.book.BookSearchParametersDto;
 import com.book.store.dto.book.CreateBookRequestDto;
 import com.book.store.service.BookService;
@@ -48,7 +49,7 @@ public class BookController {
     )
     @GetMapping
     @PreAuthorize("hasRole('USER')")
-    public Page<BookDto> findAll(Pageable pageable) {
+    public Page<BookDtoWithoutCategoryIds> findAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
