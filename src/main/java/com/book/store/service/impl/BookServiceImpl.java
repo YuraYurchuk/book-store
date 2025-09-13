@@ -32,9 +32,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Page<BookDtoWithoutCategoryIds> findAll(Pageable pageable) {
+    public Page<BookDto> findAll(Pageable pageable) {
         return bookRepository.findAll(pageable)
-                .map(bookMapper::toDtoWithoutCategories);
+                .map(bookMapper::toDto);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findAllByCategoryId(Long categoryId) {
+    public List<BookDtoWithoutCategoryIds> findAllByCategoryId(Long categoryId) {
         return bookRepository.findAllByCategories_Id(categoryId);
     }
 }

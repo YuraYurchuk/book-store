@@ -1,8 +1,8 @@
 package com.book.store.controller;
 
+import com.book.store.dto.book.BookDtoWithoutCategoryIds;
 import com.book.store.dto.category.CategoryDto;
 import com.book.store.dto.category.CreateCategoryRequestDto;
-import com.book.store.model.Book;
 import com.book.store.service.BookService;
 import com.book.store.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -92,7 +92,7 @@ public class CategoryController {
     )
     @GetMapping("/{id}/books")
     @PreAuthorize("hasRole('USER')")
-    public List<Book> getBooksByCategoryId(@PathVariable Long id) {
+    public List<BookDtoWithoutCategoryIds> getBooksByCategoryId(@PathVariable Long id) {
         return bookService.findAllByCategoryId(id);
     }
 }
