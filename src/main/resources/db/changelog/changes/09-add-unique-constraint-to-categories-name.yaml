@@ -1,9 +1,0 @@
-databaseChangeLog:
-  - changeSet:
-      id: add-unique-constraint-to-categories-name
-      author: mateacademy
-      changes:
-        - addUniqueConstraint:
-            tableName: categories
-            columnNames: name
-            constraintName: uk_categories_name
