@@ -8,7 +8,7 @@ import com.book.store.model.Role;
 import com.book.store.model.ShoppingCart;
 import com.book.store.model.User;
 import com.book.store.repository.role.RoleRepository;
-import com.book.store.repository.shoppingCart.ShoppingCartRepository;
+import com.book.store.repository.shoppingcart.ShoppingCartRepository;
 import com.book.store.repository.user.UserRepository;
 import com.book.store.service.UserService;
 import java.util.Set;

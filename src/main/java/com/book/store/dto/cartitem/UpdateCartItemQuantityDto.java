@@ -1,4 +1,4 @@
-package com.book.store.dto.cartItem;
+package com.book.store.dto.cartitem;
 
 import jakarta.validation.constraints.Min;
 import lombok.Data;

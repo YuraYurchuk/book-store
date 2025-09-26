@@ -1,8 +1,8 @@
 package com.book.store.service.impl;
 
-import com.book.store.dto.cartItem.CartItemsResponseDto;
-import com.book.store.dto.cartItem.CreateCartItemsRequestDto;
-import com.book.store.dto.shoppingCart.ShoppingCartDto;
+import com.book.store.dto.cartitem.CartItemsResponseDto;
+import com.book.store.dto.cartitem.CreateCartItemsRequestDto;
+import com.book.store.dto.shoppingcart.ShoppingCartDto;
 import com.book.store.exception.EntityNotFoundException;
 import com.book.store.mapper.CartItemMapper;
 import com.book.store.mapper.ShoppingCartMapper;
@@ -11,8 +11,8 @@ import com.book.store.model.CartItem;
 import com.book.store.model.ShoppingCart;
 import com.book.store.model.User;
 import com.book.store.repository.book.BookRepository;
-import com.book.store.repository.cartItem.CartItemsRepository;
-import com.book.store.repository.shoppingCart.ShoppingCartRepository;
+import com.book.store.repository.cartitem.CartItemsRepository;
+import com.book.store.repository.shoppingcart.ShoppingCartRepository;
 import com.book.store.repository.user.UserRepository;
 import com.book.store.service.ShoppingCartService;
 import lombok.RequiredArgsConstructor;

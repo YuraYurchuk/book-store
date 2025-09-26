@@ -1,9 +1,9 @@
 package com.book.store.controller;
 
-import com.book.store.dto.cartItem.CreateCartItemsRequestDto;
-import com.book.store.dto.cartItem.CartItemsResponseDto;
-import com.book.store.dto.cartItem.UpdateCartItemQuantityDto;
-import com.book.store.dto.shoppingCart.ShoppingCartDto;
+import com.book.store.dto.cartitem.CartItemsResponseDto;
+import com.book.store.dto.cartitem.CreateCartItemsRequestDto;
+import com.book.store.dto.cartitem.UpdateCartItemQuantityDto;
+import com.book.store.dto.shoppingcart.ShoppingCartDto;
 import com.book.store.service.CartItemService;
 import com.book.store.service.ShoppingCartService;
 import io.swagger.v3.oas.annotations.Operation;

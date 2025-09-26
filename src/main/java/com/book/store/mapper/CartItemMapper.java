@@ -1,8 +1,8 @@
 package com.book.store.mapper;
 
 import com.book.store.config.MapperConfig;
-import com.book.store.dto.cartItem.CartItemsResponseDto;
-import com.book.store.dto.cartItem.CreateCartItemsRequestDto;
+import com.book.store.dto.cartitem.CartItemsResponseDto;
+import com.book.store.dto.cartitem.CreateCartItemsRequestDto;
 import com.book.store.model.CartItem;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,6 +16,7 @@ public interface CartItemMapper {
     @Mapping(target = "shoppingCart", ignore = true)
     @Mapping(target = "book", ignore = true)
     CartItem toModel(CreateCartItemsRequestDto requestDto);
+
     @Mapping(target = "bookId", source = "book.id")
     @Mapping(target = "bookTitle", source = "book.title")
     CartItemsResponseDto toDto(CartItem cartItem);

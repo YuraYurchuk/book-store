@@ -1,6 +1,6 @@
-package com.book.store.dto.shoppingCart;
+package com.book.store.dto.shoppingcart;
 
-import com.book.store.dto.cartItem.CartItemsResponseDto;
+import com.book.store.dto.cartitem.CartItemsResponseDto;
 import java.util.Set;
 import lombok.Data;
 

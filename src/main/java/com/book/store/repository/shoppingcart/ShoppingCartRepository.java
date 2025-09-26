@@ -1,4 +1,4 @@
-package com.book.store.repository.shoppingCart;
+package com.book.store.repository.shoppingcart;
 
 import com.book.store.model.ShoppingCart;
 import com.book.store.model.User;
