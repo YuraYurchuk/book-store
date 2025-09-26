@@ -5,8 +5,10 @@ import com.book.store.dto.user.UserResponseDto;
 import com.book.store.exception.RegistrationException;
 import com.book.store.mapper.UserMapper;
 import com.book.store.model.Role;
+import com.book.store.model.ShoppingCart;
 import com.book.store.model.User;
 import com.book.store.repository.role.RoleRepository;
+import com.book.store.repository.shoppingCart.ShoppingCartRepository;
 import com.book.store.repository.user.UserRepository;
 import com.book.store.service.UserService;
 import java.util.Set;
@@ -23,6 +25,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ShoppingCartRepository shoppingCartRepository;
 
     @Override
     public UserResponseDto register(UserRegistrationRequestDto requestDto)
@@ -36,6 +39,10 @@ public class UserServiceImpl implements UserService {
                 -> new RegistrationException("Can't find role " + Role.RoleName.ROLE_USER));
         user.setRoles(Set.of(role));
         user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
-        return userMapper.toDto(userRepository.save(user));
+        User savedUser = userRepository.save(user);
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setUser(savedUser);
+        shoppingCartRepository.save(shoppingCart);
+        return userMapper.toDto(savedUser);
     }
 }
