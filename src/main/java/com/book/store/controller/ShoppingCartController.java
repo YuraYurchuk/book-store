@@ -1,10 +1,8 @@
 package com.book.store.controller;
 
-import com.book.store.dto.cartitem.CartItemsResponseDto;
 import com.book.store.dto.cartitem.CreateCartItemsRequestDto;
 import com.book.store.dto.cartitem.UpdateCartItemQuantityDto;
 import com.book.store.dto.shoppingcart.ShoppingCartDto;
-import com.book.store.service.CartItemService;
 import com.book.store.service.ShoppingCartService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,7 +29,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
-    private final CartItemService cartItemService;
 
     @Operation(
             summary = "Add a book to the shopping cart",
@@ -39,7 +36,8 @@ public class ShoppingCartController {
     )
     @PostMapping
     @PreAuthorize("hasRole('USER')")
-    public CartItemsResponseDto addBookToShoppingCart(
+    @ResponseStatus(HttpStatus.CREATED)
+    public ShoppingCartDto addBookToShoppingCart(
             @RequestBody @Valid CreateCartItemsRequestDto requestDto) {
         return shoppingCartService.saveBooksToShoppingCart(requestDto);
     }
@@ -61,10 +59,10 @@ public class ShoppingCartController {
     )
     @PutMapping("/item/{cartItemId}")
     @PreAuthorize("hasRole('USER')")
-    public CartItemsResponseDto updateCartItem(
+    public ShoppingCartDto updateCartItem(
             @PathVariable Long cartItemId,
             @RequestBody @Valid UpdateCartItemQuantityDto requestDto) {
-        return cartItemService.updateQuantity(requestDto, cartItemId);
+        return shoppingCartService.updateQuantity(requestDto, cartItemId);
     }
 
     @Operation(
@@ -75,6 +73,6 @@ public class ShoppingCartController {
     @DeleteMapping("/item/{cartItemId}")
     @PreAuthorize("hasRole('USER')")
     public void deleteCartItem(@PathVariable Long cartItemId) {
-        cartItemService.deleteById(cartItemId);
+        shoppingCartService.deleteById(cartItemId);
     }
 }
