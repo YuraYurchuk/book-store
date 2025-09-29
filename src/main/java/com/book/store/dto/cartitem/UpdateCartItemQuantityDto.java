@@ -1,10 +1,10 @@
 package com.book.store.dto.cartitem;
 
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
 public class UpdateCartItemQuantityDto {
-    @Min(value = 1, message = "quantity is required")
+    @Positive
     private int quantity;
 }
