@@ -42,9 +42,9 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>("Entity not found exception occurred", HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(RegistrationException.class)
-    public ResponseEntity<String> handlerRegistrationException(RegistrationException ex) {
-        return new ResponseEntity<>("Registration exception occurred", HttpStatus.CONFLICT);
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<String> handlerIllegalStateException(IllegalStateException ex) {
+        return new ResponseEntity<>("Illegal state exception occurred", HttpStatus.CONFLICT);
     }
 
     private String getErrorMassage(ObjectError e) {
