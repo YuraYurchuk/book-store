@@ -5,6 +5,7 @@ import com.book.store.dto.order.OrderDto;
 import com.book.store.dto.order.UpdateOrderStatusDto;
 import com.book.store.dto.orderitem.OrderItemDto;
 import com.book.store.exception.EntityNotFoundException;
+import com.book.store.exception.OrderProcessingException;
 import com.book.store.mapper.OrderItemMapper;
 import com.book.store.mapper.OrderMapper;
 import com.book.store.model.CartItem;
@@ -50,7 +51,9 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto saveOrder(CreateOrderRequestDto dto) {
         ShoppingCart shoppingCart = getShoppingCartByUser();
         if (shoppingCart.getCartItems().isEmpty()) {
-            throw new IllegalStateException("Shopping Cart is empty");
+            throw new OrderProcessingException("CartItem field in class ShoppingCart is empty. "
+                    + "Size must be greater than 0, but naw is "
+                    + shoppingCart.getCartItems().size());
         }
         Order order = orderMapper.fromShoppingCart(shoppingCart);
         order.setStatus(Order.Status.PENDING);
