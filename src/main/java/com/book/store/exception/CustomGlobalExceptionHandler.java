@@ -39,12 +39,20 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<String> handlerEntityNotFoundException(EntityNotFoundException ex) {
-        return new ResponseEntity<>("Entity not found exception occurred", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Entity not found exception occurred. " + ex.getMessage(),
+                HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(OrderProcessingException.class)
+    public ResponseEntity<Object> handlerOrderProcessingException(OrderProcessingException ex) {
+        return new ResponseEntity<>("Order processing exception occurred. " + ex.getMessage(),
+                HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(RegistrationException.class)
-    public ResponseEntity<String> handlerRegistrationException(RegistrationException ex) {
-        return new ResponseEntity<>("Registration exception occurred", HttpStatus.CONFLICT);
+    public ResponseEntity<Object> handlerRegistrationException(RegistrationException ex) {
+        return new ResponseEntity<>("Registration exception occurred. " + ex.getMessage(),
+                HttpStatus.CONFLICT);
     }
 
     private String getErrorMassage(ObjectError e) {
