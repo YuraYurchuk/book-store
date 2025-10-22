@@ -1,0 +1,41 @@
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: on-failure
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQLDB_DATABASE}
+      - MYSQL_USER=${MYSQLDB_USER}
+      - MYSQL_PASSWORD=${MYSQLDB_PASSWORD}
+    ports:
+      - "${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: bookstore-app
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    env_file: ./.env
+    ports:
+      - "${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/${MYSQLDB_DATABASE}?serverTimezone=UTC"
+      SPRING_DATASOURCE_USERNAME: "${MYSQLDB_USER}"
+      SPRING_DATASOURCE_PASSWORD: "${MYSQLDB_PASSWORD}"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: "org.hibernate.dialect.MySQLDialect"
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    restart: on-failure
+
+volumes:
+  mysql_data:
