@@ -18,6 +18,6 @@ jobs:
           cache: maven
 
       - name: Build with Maven
-        working-directory: ./book-store
         run: mvn --batch-mode --update-snapshots verify
+        working-directory: .
 
