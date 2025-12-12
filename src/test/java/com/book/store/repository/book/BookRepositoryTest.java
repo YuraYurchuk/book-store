@@ -1,7 +1,6 @@
 package com.book.store.repository.book;
 
 import com.book.store.TestDataFactory;
-import com.book.store.custom.CustomMySqlContainer;
 import com.book.store.dto.book.BookDtoWithoutCategoryIds;
 import java.util.List;
 import org.assertj.core.api.Assertions;
@@ -11,15 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Testcontainers
 class BookRepositoryTest {
-    @Container
-    private static final CustomMySqlContainer mysql = CustomMySqlContainer.getInstance();
     @Autowired
     private BookRepository bookRepository;
 
