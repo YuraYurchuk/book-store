@@ -4,7 +4,7 @@ import org.testcontainers.containers.MySQLContainer;
 
 public class CustomMySqlContainer extends MySQLContainer<CustomMySqlContainer> {
 
-    private static final String MYSQL_VERSION = "mysql:8.0";
+    private static final String MYSQL_VERSION = "mysql:8.0.32";
 
     private static CustomMySqlContainer container;
 
