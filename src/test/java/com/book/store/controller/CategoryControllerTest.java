@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.book.store.TestDataFactory;
+import com.book.store.custom.CustomMySqlContainer;
 import com.book.store.dto.book.BookDto;
 import com.book.store.dto.book.BookDtoWithoutCategoryIds;
 import com.book.store.dto.category.CategoryDto;
@@ -41,10 +42,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
+@Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CategoryControllerTest {
-    protected static MockMvc mockMvc;
+    @Container
+    private static final CustomMySqlContainer mysql = CustomMySqlContainer.getInstance();
+    private static MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
 
