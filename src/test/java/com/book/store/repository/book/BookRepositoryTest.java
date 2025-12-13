@@ -32,6 +32,7 @@ class BookRepositoryTest {
         registry.add("spring.datasource.password", mysql::getPassword);
         // Примусово вмикаємо Liquibase для цього тесту
         registry.add("spring.liquibase.enabled", () -> "true");
+        registry.add("spring.jpa.hibernate.ddl-auto", () -> "none");
     }
 
     @Test
