@@ -1,7 +1,9 @@
 package com.book.store.dto.book;
 
 import java.math.BigDecimal;
+import lombok.experimental.Accessors;
 
+@Accessors(chain = true)
 public record BookDtoWithoutCategoryIds(
         Long id,
         String title,
